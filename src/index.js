@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import Category from "./category";
 import ArrayCategory from "./arrayCategory";
 import StringCategory from "./stringCategory";
-import {generateNumArray} from "./testCaseGenerator";
+import {arrayGeneration} from "./testCaseGenerator";
 import "./index.css";
 class App extends React.Component{
 
@@ -12,15 +12,28 @@ class App extends React.Component{
 
         this.state = {
             currentCategory : <ArrayCategory
-                generate = {this.arrayGenerator}
+                generate = {this.generateTestCase}
             />,
             testcase : ""
         };
     }
 
-    arrayGenerator = (dataType, arraySize, minIn, maxIn, includeNull,sorted, repeated) => {
+    generateTestCase = (dataType, arraySize, minIn, maxIn,sorted, repeated, decimals, lower, upper, numbers,special, strLength) => {
         
-        let temp = generateNumArray(arraySize,minIn,maxIn,includeNull,sorted, repeated);
+        let temp = arrayGeneration(
+            dataType,
+            arraySize,
+            minIn,
+            maxIn,
+            sorted, 
+            repeated,
+            decimals,
+            lower,
+            upper,
+            numbers,
+            special,
+            strLength
+        );
 
         this.setState({testcase : temp});
         
@@ -41,7 +54,18 @@ class App extends React.Component{
         this.setState({currentCategory: temp});
     }
 
+    copyToClipboard = () =>{
+        //code taken from https://www.arclab.com/en/kb/htmlcss/how-to-copy-text-from-html-element-to-clipboard.html
 
+        var r = document.createRange();
+        r.selectNode(document.getElementById('testCase'));
+        window.getSelection().removeAllRanges();
+        window.getSelection().addRange(r);
+        document.execCommand('copy');
+        window.getSelection().removeAllRanges();
+
+        //
+    }
 
     render(){
         return(
@@ -54,6 +78,8 @@ class App extends React.Component{
                 <p id = "testCase">
                     [{this.state.testcase}]
                 </p>
+                <br></br>
+                <button onClick = {this.copyToClipboard}> Copy </button>
             </div>
         )
     }

@@ -8,22 +8,53 @@ class ArrayCategory extends React.Component{
             arraySize : 1,
             minIn : -1000000000,
             maxIn :  1000000000,
-            includeNull : false,
             sort : false,
-            repeated: false
+            repeated: false,
+            decimals : 1,
+            lowerCase : false,
+            upperCase : false,
+            numbers : false,
+            special : false,
+            strLength : 1,
+            decimalVisible : { visibility : 'hidden'},
+            charStringVisible : {visibility :'hidden'},
+            sortRepeated : {visibility : 'visible'}
         };
     }
 
     handleDataTypeChange = (evt) => {
+
         this.setState({ dataType: evt.target.value});
+
+        if(evt.target.value == 'int'){
+            this.setState({
+                decimalVisible : {visibility : 'hidden'}, 
+                charStringVisible : {visibility: 'hidden'},
+                sortRepeated : {visibility : 'visible'}
+            });
+        }else if ( evt.target.value == 'float'){
+            this.setState({
+                decimalVisible : {visibility : 'visible'}, 
+                charStringVisible : {visibility: 'hidden'},
+                sortRepeated : {visibility : 'visible'}
+            });
+        }else if ( (evt.target.value == 'char') || (evt.target.value == 'string') ){
+            this.setState({
+                decimalVisible : {visibility : 'hidden'}, 
+                charStringVisible : {visibility: 'visible'},
+                sortRepeated : {visibility : 'hidden'}
+            });
+        }else{
+            this.setState({
+                decimalVisible : {visibility : 'hidden'}, 
+                charStringVisible : {visibility: 'hidden'},
+                sortRepeated : {visibility : 'hidden'}
+            });
+        }
     }
 
     handleInputChange = (evt) =>{
         this.setState({[evt.target.name] : evt.target.value});
-    }
-
-    handleNullChange = () =>{
-        this.setState({includeNull : !this.state.includeNull});
     }
 
     handleSortChange = () =>{
@@ -34,6 +65,22 @@ class ArrayCategory extends React.Component{
         this.setState({repeated : !this.state.repeated});
     }
 
+    handleLower = () =>{
+        this.setState({lowerCase : !this.state.lowerCase});
+    }
+
+    handleUpper = () => {
+        this.setState({upperCase : !this.state.upperCase});
+    }
+
+    handleNum = () =>{
+        this.setState({numbers : !this.state.numbers});
+    }
+
+    handleSpecial = () =>{
+        this.setState({special : !this.state.special});
+    }
+
     callArrayGenerator = (evt) => {
         evt.preventDefault();
         this.props.generate(
@@ -41,9 +88,14 @@ class ArrayCategory extends React.Component{
             this.state.arraySize, 
             this.state.minIn,
             this.state.maxIn, 
-            this.state.includeNull,
             this.state.sort,
-            this.state.repeated);
+            this.state.repeated,
+            this.state.decimals,
+            this.state.lowerCase,
+            this.state.upperCase,
+            this.state.numbers,
+            this.state.special,
+            this.state.strLength);
     }
 
     render(){
@@ -57,9 +109,10 @@ class ArrayCategory extends React.Component{
                     </label>
                     <select id = "arrayDataType" onChange ={this.handleDataTypeChange}>
                         <option value = "int"   > int   </option>
-                        <option value = "double"> double</option>
+                        <option value = "float"> float</option>
                         <option value = "bool"  > bool  </option>
                         <option value = "char"  > char  </option>
+                        <option value = "string"> string</option>
                     </select>
 
                     <label for = "arraySize">
@@ -75,43 +128,91 @@ class ArrayCategory extends React.Component{
                         min = '1'
                         onChange = {this.handleInputChange}
                     />
+                    <div style = {this.state.sortRepeated}>
+                        <h4>Type the range of numbers from -1000000000 to 1000000000
+                            <br></br>
+                            If range is way too small for the size of the array and no repeated values are allowed,
+                            the range will increase automatically
+                        </h4>                                               
+                        <label for = "minInput"> Min </label>
+                        <input 
+                            name = 'minIn' 
+                            min = '-1000000000'
+                            max =  '1000000000'
+                            id =  "minInput" 
+                            onChange = {this.handleInputChange}
+                            type = "number"
+                        /> 
 
-                    <h4>Type the range of numbers from -1000000000 to 1000000000</h4>                                               
-                    <label for = "minInput"> Min </label>
-                    <input 
-                        name = 'minIn' 
-                        min = '-1000000000'
-                        max =  '1000000000'
-                        id =  "minInput" 
-                        onChange = {this.handleInputChange}
-                        type = "number"
-                    /> 
+                        <label for = "maxInput"> Max </label>
+                        <input 
+                            name = 'maxIn'
+                            min = '-1000000000'
+                            max =  '1000000000' 
+                            id = 'maxInput'  
+                            onChange = {this.handleInputChange} 
+                            type = "number"
+                        /> 
+                    </div>
+                    <div style = {this.state.decimalVisible}>
+                        <label> 
+                            <h4>
+                                Amount of decimals (from 1 to 10)
+                            </h4>
+                        </label>
+                        <input
+                            name = "decimals"
+                            min = "1"
+                            max = "10"
+                            onChange = {this.handleInputChange}
+                        />
+                    </div>
+                    <div style = {this.state.sortRepeated}>
+                        <label>
+                            <h4>
+                                Sort the array? Allow repeated values?
+                            </h4>
+                            Sort?
+                        </label>
+        
+                        <input type = "checkbox" onClick =  {this.handleSortChange} />
+                        <labe> Allow repeated values?</labe>
+                        <input type = "checkbox" onClick =  {this.handleRepeatedChange} />
+                    </div>
+                    <div style = {this.state.charStringVisible}>
+                        <label>
+                            <h4>
+                                string and char options
+                            </h4>
+                            Lower Case?
+                        </label>
+                        <input type = 'checkbox' onChange = {this.handleLower}/>
 
-                    <label for = "maxInput"> Max </label>
-                    <input 
-                        name = 'maxIn'
-                        min = '-1000000000'
-                        max =  '1000000000' 
-                        id = 'maxInput'  
-                        onChange = {this.handleInputChange} 
-                        type = "number"
-                    /> 
-                    <label>
-                        <h4>
-                            Include null values? Sort the array? Allow repeated values?
-                        </h4>
-                        Null?
-                    </label>
-                    <input type = "checkbox" onChange = {this.handleNullChange}/>
-                    <label> Sort?</label>
-                    <input type = "checkbox" onClick =  {this.handleSortChange} />
-                    <labe> Allow repeated values?</labe>
-                    <input type = "checkbox" onClick =  {this.handleRepeatedChange} />
-                    <br></br>
+                        <label> Upper Case?</label>
+                        <input type = 'checkbox' onChange = {this.handleUpper}/>
+
+                        <label> Numbers? </label>
+                        <input type = 'checkbox' onChange = {this.handleNum}/>
+
+                        <label> Special Characters? </label>
+                        <input type = 'checkbox' onChange = {this.handleSpecial}/>
+                        <br></br>
+                        <br></br>
+                        <label>string length </label>
+                        <input 
+                            name = 'strLength'
+                            type = "number"
+                            min = '1'
+                            max = '10000'
+                            onChange = {this.handleInputChange}
+                        />
+                    </div>
+
                     <br></br>
                     <button id = 'buttonGenerate' onClick = {this.callArrayGenerator}>Generate Random Test Case</button>
                     
                 </form>
+                
             </div>
         )
     }

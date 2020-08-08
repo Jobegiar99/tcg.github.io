@@ -1,72 +1,165 @@
-export const generateNumArray = (arraySize, minIn, maxIn, includeNull, sorted, repeated) => {
-    if( minIn > maxIn){
-        let temp = minIn;
-        minIn = maxIn;
+var chance = require('chance').Chance();
+
+
+export const arrayGeneration = (dataType, arraySize, minIn, maxIn, sorted, repeated,decimals,lower,upper,number,special, strLength) => {
+    let testCase =  "";
+    let charPool = "";
+
+    if(lower)
+        charPool += 'abcdefghijklmnopqrstuvwxyz';
+
+    if(upper)
+        charPool += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+    if(number)
+        charPool += '0123456789';
+    
+    if(special)
+        charPool += '!@#$%^&*()';
+
+    
+    charPool = charPool.toString();
+
+    if( minIn < -1000000000) minIn = -1000000000;
+
+    if( minIn > 1000000000) minIn = 1000000000;
+    
+    if( maxIn < -1000000000) maxIn = -1000000000;
+    
+    if ( maxIn > 1000000000) maxIn = 1000000000;
+    
+    if ( minIn > maxIn){
+
+        let temp = maxIn;
         maxIn = minIn;
+        minIn = temp;
+    
     }
 
-    if( minIn < -1000000000){
-        minIn = -1000000000;
-    }
-    if( minIn > 1000000000){
-        minIn = 1000000000;
-    }
-    if( maxIn < -1000000000){
-        maxIn = -1000000000;
-    }
-    if ( maxIn > 1000000000){
-        maxIn = 1000000000;
-    }
-    if( arraySize < 1){
-        arraySize = 1;
-    }
-    if( arraySize > 100000){
-        arraySize = 100000;
-    }
-    if( minIn < 0 && maxIn < 0){
+    testCase = generateArray(dataType, arraySize, minIn, maxIn,sorted,repeated,decimals,charPool,strLength);
 
-    }
+    
+    return testCase;
+}
+
+
+let generateArray = (dataType,arraySize, minIn, maxIn,sorted, repeated,decimals, charPool,strLength) => {
 
     let temp = new Array(arraySize);
-    let seenValues = [];
-    let negative = (minIn < 0 && maxIn < 0) ? true : false;
-    let containsRepeated = false;
+    let seen = new Array(arraySize);
+    let minMaxTurn = false;
 
+    for( let i = 0; i < arraySize; i++){
+        let rand = choiceGenerator(dataType,decimals,minIn,maxIn, strLength) ;
 
-    if(negative){
-        let temp = -minIn;
-        minIn = -maxIn;
-        maxIn = temp;
-    }
+        if((!repeated) && (dataType == 'float' || dataType == 'int')){
 
-    for(let i = 0; i < arraySize; i++){
-        let rand = ( Math.floor( Math.random() * (maxIn - minIn + 1) + minIn));
+            if( seen.includes(rand) ){
+                let limit = 10000;
 
-        if(!repeated){
-            if( seenValues.includes(rand)){
+                while(seen.includes(rand) && limit > 0){
 
-                let maxIterations = 1000;
-
-                while(!seenValues.includes(rand) && maxIterations > 0){
-
-                    rand = ( Math.floor( Math.random() * (maxIn - minIn + 1) + minIn));
-                    maxIterations--;
-
+                    rand = choiceGenerator(dataType,decimals,minIn,maxIn, strLength);
+                    limit--;
+                    
                 }
-                if(seenValues.includes(rand)){
-                    containsRepeated = true;
+                if(seen.includes(rand)){
+                    minIn--;
+                    maxIn++;
+
+                    if(minMaxTurn) 
+                        rand = minIn;
+
+                    else   
+                        rand = maxIn;
+
+                    minMaxTurn = !minMaxTurn;
+
                 }
             }
+            seen[i] = rand;
+
+
+
+        }else if(dataType == 'char'){
+
+            if(!charPool.includes(rand)){
+                while(!charPool.includes(rand)){
+                    rand = choiceGenerator(dataType,decimals,minIn,maxIn,charPool, strLength);
+                }
+            }
+
+        }else{
+            let found = true;
+            /*while(found){
+                let changed = false;
+                for(let i = 0; i < rand.length; i++){
+                    if(!charPool.includes(rand[i])){
+                        rand = choiceGenerator(dataType, decimals,minIn,maxIn,charPool, strLength);
+                        changed = true;
+                        break;
+                    }
+                }
+                if (!changed){
+                    found = false;
+                }
+
+            }*/
         }
-        if(containsRepeated){
-            alert('As range is way to small for the size of this array, it will contain duplicated values');
-        }
-        temp[i] = (negative) ? -rand : rand;
-        seenValues.push((negative) ? -rand : rand);
+        temp[i] = rand;
 
     }
-    return temp.join();
+
+    if(sorted)
+        temp = temp.sort(function(a, b){return a-b});
     
+    let testCase = temp.join();
+
+    if( dataType == 'char')
+        return fixCharTest(testCase);
+    
+    return testCase;
+
 }
+
+let choiceGenerator = (dataType, decimals, minIn, maxIn, charPool, strLength) =>{
+
+    if(dataType == 'int'){
+
+        return chance.integer({ min: parseInt(minIn), max: parseInt(maxIn) });
+
+    }else if ( dataType == 'float'){
+
+        return chance.floating({ min: parseFloat(minIn), max: parseFloat(maxIn), fixed: decimals });
+    
+    }else if ( dataType == 'bool'){
+
+        return chance.bool();
+
+    }else if ( dataType == 'char'){
+
+        return chance.character({pool : charPool});
+
+    }else{
+        return chance.string({pool : charPool, length : strLength})
+    }
+
+
+}
+
+let fixCharTest = (test) =>{
+    let temp = "";
+    for(let i = 0; i < test.length; i++){
+
+        if( i % 2 == 0){
+            temp += "\'" + test[i] + "\'"
+        }else{
+            temp += test[i];
+        }
+
+    }
+    return temp;
+}
+
 
 

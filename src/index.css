@@ -1,10 +1,10 @@
 #testCase{
     font-size: 12px;
     width: 50em;
-    height: 5em;
+    height: 2.5em;
     max-width: 50em;
     overflow: auto;
-    border: 0.001em outset black;
+    border: 0.0001em outset black;
     display: table-cell;
     vertical-align: middle;
 }
