@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/tcg.github.io/static/css/main.eaac28f6.chunk.css",
+    "main.js": "/tcg.github.io/static/js/main.ed74a8cc.chunk.js",
+    "main.js.map": "/tcg.github.io/static/js/main.ed74a8cc.chunk.js.map",
+    "runtime-main.js": "/tcg.github.io/static/js/runtime-main.0ab394ce.js",
+    "runtime-main.js.map": "/tcg.github.io/static/js/runtime-main.0ab394ce.js.map",
+    "static/js/2.2413c378.chunk.js": "/tcg.github.io/static/js/2.2413c378.chunk.js",
+    "static/js/2.2413c378.chunk.js.map": "/tcg.github.io/static/js/2.2413c378.chunk.js.map",
+    "index.html": "/tcg.github.io/index.html",
+    "precache-manifest.cf3da649cf88dc5e02a73ebc4fdf9095.js": "/tcg.github.io/precache-manifest.cf3da649cf88dc5e02a73ebc4fdf9095.js",
+    "service-worker.js": "/tcg.github.io/service-worker.js",
+    "static/css/main.eaac28f6.chunk.css.map": "/tcg.github.io/static/css/main.eaac28f6.chunk.css.map",
+    "static/js/2.2413c378.chunk.js.LICENSE.txt": "/tcg.github.io/static/js/2.2413c378.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.0ab394ce.js",
+    "static/js/2.2413c378.chunk.js",
+    "static/css/main.eaac28f6.chunk.css",
+    "static/js/main.ed74a8cc.chunk.js"
+  ]
+}
