@@ -65,21 +65,26 @@ class App extends React.Component{
         window.getSelection().removeAllRanges();
 
         //
+        alert('Test case has been copied to clipboard :).');
     }
 
     render(){
         return(
             <div align = "center">
+                This app is under development. Expect more features soon :)
                 <Category
                     handleChange = {this.handleChange}
                 />  
                 {this.state.currentCategory}
                 <br></br>
+                <button onClick = {this.copyToClipboard}> Copy </button>
+                <br></br>
+                <br></br>
                 <p id = "testCase">
                     [{this.state.testcase}]
                 </p>
                 <br></br>
-                <button onClick = {this.copyToClipboard}> Copy </button>
+                
             </div>
         )
     }

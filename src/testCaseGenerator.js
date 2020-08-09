@@ -1,9 +1,10 @@
+//https://chancejs.com/
 var chance = require('chance').Chance();
-
+//
 
 export const arrayGeneration = (dataType, arraySize, minIn, maxIn, sorted, repeated,decimals,lower,upper,number,special, strLength) => {
     let testCase =  "";
-    let charPool = "";
+    let charPool = '';
 
     if(lower)
         charPool += 'abcdefghijklmnopqrstuvwxyz';
@@ -17,9 +18,24 @@ export const arrayGeneration = (dataType, arraySize, minIn, maxIn, sorted, repea
     if(special)
         charPool += '!@#$%^&*()';
 
+    if(charPool == ''){
+        charPool = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()';
+    }
     
-    charPool = charPool.toString();
+    charPool = String(charPool);
 
+    if(arraySize < 1) arraySize = 1;
+    
+    if( arraySize > 10000) arraySize = 10000;
+
+    if(decimals < 1) decimals = 1;
+
+    if( decimals > 10) decimals = 10;
+
+    if( strLength < 1) strLength = 1;
+
+    if( strLength > 1000) strLength = 1000;
+    
     if( minIn < -1000000000) minIn = -1000000000;
 
     if( minIn > 1000000000) minIn = 1000000000;
@@ -48,10 +64,11 @@ let generateArray = (dataType,arraySize, minIn, maxIn,sorted, repeated,decimals,
     let temp = new Array(arraySize);
     let seen = new Array(arraySize);
     let minMaxTurn = false;
-
+    
     for( let i = 0; i < arraySize; i++){
-        let rand = choiceGenerator(dataType,decimals,minIn,maxIn, strLength) ;
-
+        
+        let rand = choiceGenerator(dataType,decimals,minIn,maxIn, charPool,strLength) ;
+        
         if((!repeated) && (dataType == 'float' || dataType == 'int')){
 
             if( seen.includes(rand) ){
@@ -59,7 +76,7 @@ let generateArray = (dataType,arraySize, minIn, maxIn,sorted, repeated,decimals,
 
                 while(seen.includes(rand) && limit > 0){
 
-                    rand = choiceGenerator(dataType,decimals,minIn,maxIn, strLength);
+                    rand = choiceGenerator(dataType,decimals,minIn,maxIn,charPool, strLength);
                     limit--;
                     
                 }
@@ -89,12 +106,13 @@ let generateArray = (dataType,arraySize, minIn, maxIn,sorted, repeated,decimals,
                 }
             }
 
-        }else{
+        }else if(dataType == 'string'){
+
             let found = true;
-            /*while(found){
+            while(found){
                 let changed = false;
                 for(let i = 0; i < rand.length; i++){
-                    if(!charPool.includes(rand[i])){
+                    if( charPool.indexOf(rand[i]) == -1){
                         rand = choiceGenerator(dataType, decimals,minIn,maxIn,charPool, strLength);
                         changed = true;
                         break;
@@ -103,8 +121,8 @@ let generateArray = (dataType,arraySize, minIn, maxIn,sorted, repeated,decimals,
                 if (!changed){
                     found = false;
                 }
+            }
 
-            }*/
         }
         temp[i] = rand;
 
@@ -117,6 +135,8 @@ let generateArray = (dataType,arraySize, minIn, maxIn,sorted, repeated,decimals,
 
     if( dataType == 'char')
         return fixCharTest(testCase);
+    if(dataType == 'string')
+        return fixStringTest(testCase,strLength);
     
     return testCase;
 
@@ -125,7 +145,7 @@ let generateArray = (dataType,arraySize, minIn, maxIn,sorted, repeated,decimals,
 let choiceGenerator = (dataType, decimals, minIn, maxIn, charPool, strLength) =>{
 
     if(dataType == 'int'){
-
+        
         return chance.integer({ min: parseInt(minIn), max: parseInt(maxIn) });
 
     }else if ( dataType == 'float'){
@@ -137,13 +157,13 @@ let choiceGenerator = (dataType, decimals, minIn, maxIn, charPool, strLength) =>
         return chance.bool();
 
     }else if ( dataType == 'char'){
-
+     
         return chance.character({pool : charPool});
 
     }else{
-        return chance.string({pool : charPool, length : strLength})
+        
+        return chance.string({ pool: charPool,length : strLength});
     }
-
 
 }
 
@@ -161,5 +181,20 @@ let fixCharTest = (test) =>{
     return temp;
 }
 
+let fixStringTest = (test, len) =>{
+    let temp = "";
+    let count = 0;
+    for(let i = 0; i < test.length;i++, count++){
+        if(count % len  == 0){
+            temp += '\"' + test[i];
+        }else if(count % len == len - 1){
+            temp += test[i] + '\"';
+            count = -2;
+        }else{
+            temp += test[i];
+        }
+    }
+    return temp;
+}
 
 

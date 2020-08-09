@@ -4,7 +4,7 @@ class ArrayCategory extends React.Component{
     constructor(){
         super();
         this.state = {
-            dataType : "string",
+            dataType : "int",
             arraySize : 1,
             minIn : -1000000000,
             maxIn :  1000000000,
@@ -18,7 +18,8 @@ class ArrayCategory extends React.Component{
             strLength : 1,
             decimalVisible : { visibility : 'hidden'},
             charStringVisible : {visibility :'hidden'},
-            sortRepeated : {visibility : 'visible'}
+            sortRepeated : {visibility : 'visible'},
+            generateNumbers : {visibility : 'hidden'}
         };
     }
 
@@ -30,25 +31,30 @@ class ArrayCategory extends React.Component{
             this.setState({
                 decimalVisible : {visibility : 'hidden'}, 
                 charStringVisible : {visibility: 'hidden'},
-                sortRepeated : {visibility : 'visible'}
+                sortRepeated : {visibility : 'visible'},
+                generateNumbers : {visibility : 'hidden'}
             });
         }else if ( evt.target.value == 'float'){
             this.setState({
                 decimalVisible : {visibility : 'visible'}, 
                 charStringVisible : {visibility: 'hidden'},
-                sortRepeated : {visibility : 'visible'}
+                sortRepeated : {visibility : 'visible'},
+                generateNumbers : {visibility : 'hidden'}
             });
         }else if ( (evt.target.value == 'char') || (evt.target.value == 'string') ){
             this.setState({
                 decimalVisible : {visibility : 'hidden'}, 
                 charStringVisible : {visibility: 'visible'},
-                sortRepeated : {visibility : 'hidden'}
+                sortRepeated : {visibility : 'hidden'},
+                generateNumbers : {visibility : (evt.target.value == 'char') ? 'visible' : 'hidden'}
+                
             });
         }else{
             this.setState({
                 decimalVisible : {visibility : 'hidden'}, 
                 charStringVisible : {visibility: 'hidden'},
-                sortRepeated : {visibility : 'hidden'}
+                sortRepeated : {visibility : 'hidden'},
+                generateNumbers : {visibility : 'hidden'}
             });
         }
     }
@@ -117,8 +123,8 @@ class ArrayCategory extends React.Component{
 
                     <label for = "arraySize">
                         <h4>
-                            Select the amount of values that this array will contain from 1 to 100000. 
-                            If limit is <u>exceeded the length of the array will be set to 100000.</u>
+                            Select the amount of values that this array will contain from 1 to 10000. 
+                            If limit is <u>exceeded the length of the array will be set to 10000.</u>
                         </h4>
                     </label>
                     <input 
@@ -126,6 +132,7 @@ class ArrayCategory extends React.Component{
                         name = "arraySize"
                         type ="number"   
                         min = '1'
+                        max = '10000'
                         onChange = {this.handleInputChange}
                     />
                     <div style = {this.state.sortRepeated}>
@@ -191,19 +198,21 @@ class ArrayCategory extends React.Component{
                         <label> Upper Case?</label>
                         <input type = 'checkbox' onChange = {this.handleUpper}/>
 
-                        <label> Numbers? </label>
-                        <input type = 'checkbox' onChange = {this.handleNum}/>
+                        <div style = {this.state.generateNumbers}>
+                            <label> Numbers? </label>
+                            <input type = 'checkbox' onChange = {this.handleNum}/>
+                        </div>
 
                         <label> Special Characters? </label>
                         <input type = 'checkbox' onChange = {this.handleSpecial}/>
                         <br></br>
-                        <br></br>
-                        <label>string length </label>
+                        <br></br> 
+                        <label>string length 1 to 1000 </label>
                         <input 
                             name = 'strLength'
                             type = "number"
                             min = '1'
-                            max = '10000'
+                            max = '1000'
                             onChange = {this.handleInputChange}
                         />
                     </div>

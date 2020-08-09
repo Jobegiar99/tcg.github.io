@@ -17,7 +17,7 @@ class Category extends React.Component{
                     </label> 
                     <select id = "inputOptions" onChange = {this.handleSelect}>
                         <option value = "array" >  Array  </option>
-                        <option value = "string">  String </option>
+                        {/*} <option value = "string">  String </option>{*/}
                     </select>
                 </form>
             </div>
