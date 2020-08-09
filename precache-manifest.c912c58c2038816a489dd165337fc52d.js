@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "27469943294142bf119ee78b27a81ece",
+    "revision": "53ebec9e1588d9dc1f89b2ee5ab5be43",
     "url": "/tcg.github.io/index.html"
   },
   {
-    "revision": "8f54a6f1b9166dd2f1e5",
+    "revision": "4735f6a97ebf8b31d16d",
     "url": "/tcg.github.io/static/css/main.eaac28f6.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/tcg.github.io/static/js/2.2413c378.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "8f54a6f1b9166dd2f1e5",
-    "url": "/tcg.github.io/static/js/main.ed74a8cc.chunk.js"
+    "revision": "4735f6a97ebf8b31d16d",
+    "url": "/tcg.github.io/static/js/main.d5a01721.chunk.js"
   },
   {
     "revision": "eab05b06fd3af85d73e9",
