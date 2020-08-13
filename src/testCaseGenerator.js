@@ -194,6 +194,9 @@ let fixStringTest = (test, len) =>{
             temp += test[i];
         }
     }
+    if(temp[temp.length -1] != '\"'){
+        temp += "\"";
+    }
     return temp;
 }
 
