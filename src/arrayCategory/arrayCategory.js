@@ -1,8 +1,8 @@
 import React, {Component} from "react";
-import IntArray from "./arrayCategory/intArray";
-import FloatArray from "./arrayCategory/floatArray";
-import StringArray from "./arrayCategory/stringArray";
-import CharArray from "./arrayCategory/charArray";
+import IntArray from "./intArray";
+import FloatArray from "./floatArray";
+import StringArray from "./stringArray";
+import CharArray from "./charArray";
 
 class ArrayCategory extends React.Component{
     constructor(){
