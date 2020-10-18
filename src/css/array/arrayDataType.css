@@ -1,0 +1,87 @@
+
+
+#arrayDataTypeContainer{
+    background-color: rgba(100, 148, 237,0.25);
+}
+
+#arrayDataTypeButtons{
+    width: 100%;
+}
+
+#arrayDataTypeTitle{
+    width: auto;
+    font-size: 1.7em;
+    justify-self: center;
+    align-self: center;
+}
+
+
+
+@media only screen and (min-width: 1201px){
+    #arrayDataTypeContainer{
+        font-size: 20px;
+    }
+
+    .arrayButton{
+        font-size: 1.3em;
+        width: 7em;
+    }
+}
+
+@media only screen and (max-width: 1200px) and (min-width: 1025px){
+    #arrayDataTypeContainer{
+        font-size: 18px;
+    }
+    .arrayButton{
+        font-size: 1.8em;
+        width: 8em;
+    }
+}
+
+@media only screen and (max-width: 1024px) and (min-width: 769px){
+    #arrayDataTypeContainer{
+        font-size: 10px;
+    }
+    .arrayButton{
+        font-size: 1.8em;
+        width: 10em;
+    }
+}
+
+@media only screen and (max-width: 768px) and (min-width: 481px){
+    #arrayDataTypeContainer{
+        font-size: 10px;
+    }
+    .arrayButton{
+        width: 7em;
+    }
+}
+
+@media only screen and (max-width: 480px) and (min-width: 320px){
+    #arrayDataTypeContainer{
+        font-size: 5.15px;
+    }
+    .arrayButton{
+        font-size: 1.2em;
+        width: 8em;
+    }
+}
+
+
+@media only screen and (max-width: 319px) and (min-width: 100px){
+    #arrayDataTypeContainer{
+        font-size: 3.5px;
+    }
+    .arrayButton{
+        font-size: 1.05em;
+        width: 10em;
+    }
+}
+.arrayButton{
+    background-color: rgba(100, 148, 237,0.99);
+    font-size: 1.05em;
+    justify-content: center;
+    border-radius: 1.5em;
+    margin-left: 1.5em;
+    margin-right: 1.5em;
+}

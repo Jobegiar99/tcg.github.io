@@ -2,13 +2,24 @@ import React, {Component} from "react"
 import * as bs from "react-bootstrap";
 import "../css/mainView.css";
 import String from "./string.js";
-import Array from "./array.js";
+import Array from "./array/array.js";
 import Matrix from "./matrix.js";
 import Tree from "./tree.js";
 import Graph from "./graph.js";
 import Custom from "./custom.js";
 
 class MainView extends React.Component{
+    constructor(){
+        super();
+        this.state = {
+            currentView: <Array/>
+        }
+    }
+
+    componentDidMount(){
+        this.setState({currentView: <Array/>});
+    }
+
     render(){
         return(
             <bs.Container className = "mainContainer">
@@ -55,7 +66,7 @@ class MainView extends React.Component{
                     </bs.Container>
                 </bs.Navbar>
                 <bs.Row>
-                    
+                    {this.state.currentView}
                 </bs.Row>
             </bs.Container>
         )

@@ -1,0 +1,10 @@
+#arrayGenerationContainer{
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    background-color: rgba(100, 148, 237,0.25);
+}
+
+#arrayGenerationLabel{
+    max-width: 100px;
+    padding-top: 0.3em;
+}

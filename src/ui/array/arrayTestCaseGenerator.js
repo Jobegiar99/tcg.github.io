@@ -36,13 +36,6 @@ export const arrayGeneration = (dataType, arraySize, minIn, maxIn, sorted, repea
 
     if( strLength > 1000) strLength = 1000;
     
-    if( minIn < -1000000000) minIn = -1000000000;
-
-    if( minIn > 1000000000) minIn = 1000000000;
-    
-    if( maxIn < -1000000000) maxIn = -1000000000;
-    
-    if ( maxIn > 1000000000) maxIn = 1000000000;
     
     if ( minIn > maxIn){
 
