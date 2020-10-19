@@ -10,6 +10,11 @@ class ArrayLenRange extends React.Component{
     }
 
     render(){
+        let isDecimal = 
+            <bs.Col xs = {12} className = "justify-content-center">
+                <bs.FormLabel className = "arrayFormLabel">Decimals</bs.FormLabel>
+                <bs.FormControl onChange = {this.handleChange} className = "arrayLenRangeFormControl" name = "arrDecimals"  min = "1" type = "number" placeholder = "Range: 1-20"/>
+            </bs.Col>
         let isNumber = 
             <bs.Row className = "justify-content-center">
                 <bs.Col xs = {12} className = "justify-content-center">
@@ -20,6 +25,7 @@ class ArrayLenRange extends React.Component{
                     <bs.FormLabel className = "arrayFormLabel">Max Value</bs.FormLabel>
                     <bs.FormControl  onChange = {this.handleChange} className = "arrayLenRangeFormControl" name = "arrMax"  min = "1" type = "number" placeholder = "Range: -1000000 to 1000000"/>
                 </bs.Col>
+                {(this.props.isDecimal) ? isDecimal : null}
                 </bs.Row>;
 
         let isString =

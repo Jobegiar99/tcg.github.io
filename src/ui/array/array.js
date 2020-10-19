@@ -15,6 +15,7 @@ class Array extends React.Component{
             arrLen : 1,
             arrMin : -1000000,
             arrMax :  1000000,
+            arrDecimals:1,
             arrIncludeNumbers: false,
             arrIncludeLower: false,
             arrIncludeUpper: false,
@@ -51,11 +52,24 @@ class Array extends React.Component{
         }else if (changed.target.name == "arrayStringLength" && parseInt([changed.target.value])>= 1 && parseInt([changed.target.value]) <= 1000000){
             this.setState({[changed.target.name]: parseInt([changed.target.value])});
 
-        }else if (changed.target.name === "arrMin" && changed.target.value >= -1000000 && changed.target.value <= this.state.arrMax){
-            this.setState({[changed.target.name]: parseInt([changed.target.value])});
+        }else if (changed.target.name === "arrMin" && changed.target.value >= -1000000 && changed.target.value <= this.state.arrMax && changed.target.value != ""){
+            if(this.state.dataType == 'double')
+                this.setState({[changed.target.name]: parseFloat([changed.target.value])});
+            else
+                this.setState({[changed.target.name]: parseInt([changed.target.value])});
 
-        }else if (changed.target.name === "arrMax" && changed.target.value <= 1000000 && changed.target.value >= this.state.arrMin){
-            this.setState({[changed.target.name]: parseInt([changed.target.value])});
+        }else if (changed.target.name === "arrMax" && changed.target.value <= 1000000 && changed.target.value >= this.state.arrMin && changed.target.valuer != ""){
+            if(this.state.dataType == 'double')
+                this.setState({[changed.target.name]: parseFloat([changed.target.value])});
+            else
+                this.setState({[changed.target.name]: parseInt([changed.target.value])});
+
+        }else if (changed.target.name === 'arrDecimals' && parseInt(changed.target.value) >= 1 && parseInt(changed.target.value) <= 20){
+            this.setState({[changed.target.name]: parseInt([changed.target.value])})
+        }else if (changed.target.name === 'arrSort'){
+            this.setState({arrSort: !this.state.arrSort});
+        }else if (changed.target.name === 'arrRepeated'){
+            this.setState({arrRepeated: !this.state.arrRepeated});
         }
     }
 
@@ -70,17 +84,20 @@ class Array extends React.Component{
                     isCharString = {(this.state.dataType == "char" || this.state.dataType == "string")}
                     isBool = {(this.state.dataType == "bool")}
                     isString = {(this.state.dataType == 'string')}
+                    isDecimal = {(this.state.dataType == "double")}
                     handleChange = {this.handleChange}
                />
                
                <ArrayExtras
                     isNum = {(this.state.dataType == 'int' || this.state.dataType == 'double')}
+                    handleChange = {this.handleChange}
                />
                <ArrInput
                     dataType = {this.state.dataType}
                     arrLen = {this.state.arrLen}
                     arrMin = {this.state.arrMin}
                     arrMax = {this.state.arrMax}
+                    arrDecimals = {this.state.arrDecimals}
                     arrIncludeLower = {this.state.arrIncludeLower}
                     arrIncludeUpper = {this.state.arrIncludeUpper}
                     arrIncludeSpecial = {this.state.arrIncludeSpecial}
@@ -94,12 +111,15 @@ class Array extends React.Component{
                     arrLen = {this.state.arrLen}
                     arrMin = {this.state.arrMin}
                     arrMax = {this.state.arrMax}
+                    arrDecimals = {this.state.arrDecimals}
                     arrIncludeLower = {this.state.arrIncludeLower}
                     arrIncludeUpper = {this.state.arrIncludeUpper}
                     arrIncludeSpecial = {this.state.arrIncludeSpecial}
                     arrIncludeNumbers = {this.state.arrIncludeNumbers}
                     arrSort = {this.state.arrSort}
                     arrRepeated = {this.state.arrRepeated}
+                    arrayStringLength = {this.state.arrayStringLength}
+                    
               />
            </bs.Container>
         )

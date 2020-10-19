@@ -5,6 +5,109 @@
 }
 
 #arrayGenerationLabel{
-    max-width: 100px;
-    padding-top: 0.3em;
+    overflow: auto;
+    width: 50em;
+    height: 2em;
+}
+
+.arrayGenerationButton{
+    border-radius: 2em;
+    font-size: 2px;
+}
+
+@media only screen and (min-width: 1201px){
+    #arrayGenerationContainer{
+        font-size: 20px;
+    }
+
+    .arrayGenerationButton{
+        font-size: 1em;
+        width: 5em;
+        
+    }
+    #arrayGenerationLabel{
+        padding-top: 0.2em;
+        font-size: 1em;
+        width: 50em;
+        height: 2em;
+    }
+}
+
+@media only screen and (max-width: 1200px) and (min-width: 1025px){
+    #arrayGenerationContainer{
+        font-size: 18px;
+    }
+    .arrayGenerationButton{
+        font-size: 1em;
+        width: 8em;
+    }
+    #arrayGenerationLabel{
+        font-size: 1em;
+        width: 50em;
+        height: 2em;
+    }
+}
+
+@media only screen and (max-width: 1024px) and (min-width: 769px){
+    #arrayGenerationContainer{
+        font-size: 10px;
+    }
+    .arrayGenerationButton{
+        font-size: 1em;
+        width: 8em;
+    }
+    #arrayGenerationLabel{
+        padding-top: 0.5em;
+        font-size: 1em;
+        width: 50em;
+        height: 2em;
+    }
+}
+
+@media only screen and (max-width: 768px) and (min-width: 481px){
+    #arrayGenerationContainer{
+        font-size: 10px;
+    }
+    .arrayGenerationButton{
+        font-size: 1em;
+        width: 7em;
+    }
+    #arrayGenerationLabel{
+        padding-top: 0.5em;
+        font-size: 1em;
+        width: 50em;
+        height: 2em;
+    }
+}
+
+@media only screen and (max-width: 480px) and (min-width: 320px){
+    #arrayGenerationContainer{
+        font-size: 5.15px;
+    }
+    .arrayGenerationButton{
+        font-size: 1.2em;
+        width: 8em;
+    }
+    #arrayGenerationLabel{
+        padding-top: 1em;
+        font-size: 1em;
+        width: 50em;
+        height: 2em;
+    }
+}
+
+
+@media only screen and (max-width: 319px) and (min-width: 100px){
+    #arrayGenerationContainer{
+        font-size: 3.5px;
+    }
+    .arrayGenerationButton{
+        font-size: 1.05em;
+        width: 10em;
+    }
+    #arrayGenerationLabel{
+        font-size: 1.5em;
+        width: 50em;
+        height: 2em;
+    }
 }

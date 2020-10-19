@@ -4,37 +4,30 @@ var chance = require('chance').Chance();
 
 export const arrayGeneration = (dataType, arraySize, minIn, maxIn, sorted, repeated,decimals,lower,upper,number,special, strLength) => {
     let testCase =  "";
-    let charPool = '';
+    let charPool = "";
 
     if(lower)
-        charPool += 'abcdefghijklmnopqrstuvwxyz';
+        charPool += "abcdefghijklmnopqrstuvwxyz";
 
     if(upper)
-        charPool += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        charPool += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
     if(number)
-        charPool += '0123456789';
+        charPool += "0123456789";
     
     if(special)
-        charPool += '!@#$%^&*()';
+        charPool += "!@#$%^&*()";
 
-    if(charPool == ''){
-        charPool = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()';
+    if(!lower && !upper && !number && !special){
+        charPool = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()";
     }
+    console.log(charPool);
+    console.log(lower);
+    console.log(upper);
+    console.log(number);
+    console.log(special);
     
     charPool = String(charPool);
-
-    if(arraySize < 1) arraySize = 1;
-    
-    if( arraySize > 10000) arraySize = 10000;
-
-    if(decimals < 1) decimals = 1;
-
-    if( decimals > 10) decimals = 10;
-
-    if( strLength < 1) strLength = 1;
-
-    if( strLength > 1000) strLength = 1000;
     
     
     if ( minIn > maxIn){
@@ -62,7 +55,7 @@ let generateArray = (dataType,arraySize, minIn, maxIn,sorted, repeated,decimals,
         
         let rand = choiceGenerator(dataType,decimals,minIn,maxIn, charPool,strLength) ;
         
-        if((!repeated) && (dataType == 'float' || dataType == 'int')){
+        if((!repeated) && (dataType == 'double' || dataType == 'int')){
 
             if( seen.includes(rand) ){
                 let limit = 10000;
@@ -141,7 +134,7 @@ let choiceGenerator = (dataType, decimals, minIn, maxIn, charPool, strLength) =>
         
         return chance.integer({ min: parseInt(minIn), max: parseInt(maxIn) });
 
-    }else if ( dataType == 'float'){
+    }else if ( dataType == 'double'){
 
         return chance.floating({ min: parseFloat(minIn), max: parseFloat(maxIn), fixed: decimals });
     
@@ -194,3 +187,4 @@ let fixStringTest = (test, len) =>{
 }
 
 
+export default arrayGeneration;

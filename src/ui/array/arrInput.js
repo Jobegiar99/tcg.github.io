@@ -3,14 +3,16 @@ import * as bs from "react-bootstrap";
 import "../../css/array/arrInput.css";
 class ArrInput extends React.Component{
     render(){
+        let isString =
+            <bs.Col xs = {3}>
+                String length: {this.props.arrayStringLength}
+            </bs.Col>;
         let isCharString = 
             <bs.Row className = "justify-content-center">
                 <bs.Col xs = {3}>
                     Array Length: {this.props.arrLen}
                 </bs.Col>
-                <bs.Col xs = {3}>
-                    String length: {this.props.arrayStringLength}
-                </bs.Col>
+                {(this.props.dataType == 'string') ? isString : null}
                 <bs.Col xs = {3}>
                     Include Number: {(this.props.arrIncludeNumbers) ? "Yes": "No"}
                 </bs.Col>
@@ -24,6 +26,11 @@ class ArrInput extends React.Component{
                     Include Special: {(this.props.arrIncludeSpecial) ? "Yes": "No"}
                 </bs.Col>
             </bs.Row>;
+        
+        let isDecimals = 
+            <bs.Col xs = {3}>
+                Decimals: {this.props.arrDecimals}
+            </bs.Col>
         let isIntFloat =
             <bs.Row className = "justify-content-center">
                 <bs.Col xs = {4}>
@@ -41,6 +48,7 @@ class ArrInput extends React.Component{
                 <bs.Col xs = {3}>
                     Allow Repeated: {(this.props.arrRepeated) ? "Yes" : "No"}
                 </bs.Col>
+                {(this.props.dataType == 'double') ? isDecimals : null}
             </bs.Row>;
         let isBool = 
             <bs.Row>
