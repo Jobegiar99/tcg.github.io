@@ -30,7 +30,7 @@ class MainView extends React.Component{
                                 xs = {2}
                                 className = "mainCol"
                             >
-                                <bs.Button className = "mainButton">String</bs.Button>
+                                <bs.Button className = "notDone mainButton">String</bs.Button>
                             </bs.Col>
                             <bs.Col 
                                 xs = {2}
@@ -42,25 +42,25 @@ class MainView extends React.Component{
                                 xs = {2}
                                 className = "mainCol"
                             >
-                                <bs.Button className = "mainButton">Matrix</bs.Button>
+                                <bs.Button className = "notDone mainButton">Matrix</bs.Button>
                             </bs.Col>
                             <bs.Col 
                                 xs = {2}
                                 className = "mainCol"
                             >
-                                <bs.Button className = "mainButton">Tree</bs.Button>
+                                <bs.Button className = "notDone mainButton">Tree</bs.Button>
                             </bs.Col>
                             <bs.Col 
                                 xs = {2}
                                 className = "mainCol"
                             >
-                                <bs.Button className = "mainButton">Graph</bs.Button>
+                                <bs.Button className = "notDone mainButton">Graph</bs.Button>
                             </bs.Col>
                             <bs.Col 
                                 xs = {2}
                                 className = "mainCol"
                             >
-                                <bs.Button className = "mainButton">Custom</bs.Button>
+                                <bs.Button className = "notDone mainButton">Custom</bs.Button>
                             </bs.Col>
                         </bs.Row>
                     </bs.Container>
